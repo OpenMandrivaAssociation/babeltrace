@@ -4,12 +4,13 @@
 
 Summary:	An open source trace format converter
 Name:		babeltrace
-Version:	1.5.8
+Version:	2.0.0
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://diamon.org/babeltrace
 Source0:	http://www.efficios.com/files/babeltrace/babeltrace-%{version}.tar.bz2
+Patch0:		babeltrace-2.0.0-fix-reserved-keywords.patch
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libdw)
 BuildRequires:	pkgconfig(libelf)
@@ -18,12 +19,8 @@ BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	swig
 
-%libpackage babeltrace 1
-%libpackage babeltrace-lttng-live 1
-%libpackage babeltrace-dummy 1
-%libpackage babeltrace-ctf 1
-%libpackage babeltrace-ctf-metadata 1
-%libpackage babeltrace-ctf-text 1
+%libpackage babeltrace2 0
+%libpackage babeltrace2-ctf-writer 0
 
 %description
 An open source trace format converter.
@@ -53,6 +50,12 @@ Python bindings to the babeltrace trace format converter.
 %autosetup -p1
 
 %build
+# Workaround for failure at link time
+#ld.lld: error: undefined hidden symbol: __start___bt_plugin_descriptor_attributes
+%define _disable_lto 1
+%global optflags %{optflags} -fno-lto -Wl,-z,nostart-stop-gc -Wno-error=unknown-warning-option
+%global build_ldflags %{build_ldflags} -z nostart-stop-gc
+#export CC=gcc
 %configure --enable-python-bindings
 %make_build
 
@@ -60,11 +63,13 @@ Python bindings to the babeltrace trace format converter.
 %make_install
 
 %files
-%{_bindir}/babeltrace
-%{_bindir}/babeltrace-log
+%{_bindir}/babeltrace2
+%{_libdir}/babeltrace2
+%{_mandir}/man7/babeltrace2-*.7*
 
 %files -n %{devname}
-%{_includedir}/babeltrace
+%{_includedir}/babeltrace2
+%{_includedir}/babeltrace2-ctf-writer
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %doc %{_mandir}/man1/*
@@ -72,6 +77,4 @@ Python bindings to the babeltrace trace format converter.
 
 %files -n python-%{name}
 %{py_platsitedir}/*.egg-info
-%dir %{py_platsitedir}/%{name}
-%{py_platsitedir}/%{name}/*.so
-%{py_platsitedir}/%{name}/*.py
+%{py_platsitedir}/bt2
