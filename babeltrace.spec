@@ -29,8 +29,8 @@ An open source trace format converter.
 Summary:	Development files for the babeltrace trace format converter
 Group:		Development/Other
 Provides:	lib%{name} = %{EVRD}
-Requires:	%mklibname babeltrace2 0
-Requires:	%mklibname babeltrace2-ctf-writer 0
+Requires:	%mklibname babeltrace2
+Requires:	%mklibname babeltrace2-ctf-writer
 
 %description -n %{devname}
 Development files for the babeltrace trace format converter.
