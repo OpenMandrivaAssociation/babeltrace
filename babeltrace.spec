@@ -4,19 +4,19 @@
 
 Summary:	An open source trace format converter
 Name:		babeltrace
-Version:	2.0.0
-Release:	3
+Version:	2.0.5
+Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://diamon.org/babeltrace
-Source0:	http://www.efficios.com/files/babeltrace/babeltrace-%{version}.tar.bz2
-Patch0:		babeltrace-2.0.0-fix-reserved-keywords.patch
+Source0:	https://www.efficios.com/files/babeltrace/babeltrace2-%{version}.tar.bz2
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libdw)
 BuildRequires:	pkgconfig(libelf)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(uuid)
+BuildRequires:	bison
 BuildRequires:	swig
 
 %libpackage babeltrace2 0
@@ -43,12 +43,15 @@ Group:		Development/Python
 Python bindings to the babeltrace trace format converter.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n babeltrace2-%{version}
+# Remove bison generated files, we want to let our much newer version of bison
+# generate them
+rm src/plugins/ctf/common/metadata/parser.{c,h}
 
 %build
 # Workaround for failure at link time
 #ld.lld: error: undefined hidden symbol: __start___bt_plugin_descriptor_attributes
-%define _disable_lto 1
+#define _disable_lto 1
 %global optflags %{optflags} -fno-lto -Wl,-z,nostart-stop-gc -Wno-error=unknown-warning-option
 %global build_ldflags %{build_ldflags} -z nostart-stop-gc
 #export CC=gcc
@@ -69,7 +72,7 @@ Python bindings to the babeltrace trace format converter.
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %doc %{_mandir}/man1/*
-%doc %{_docdir}/%{name}/*
+%doc %{_docdir}/babeltrace2
 
 %files -n python-%{name}
 %{py_platsitedir}/*.egg-info
