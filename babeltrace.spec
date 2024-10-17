@@ -8,7 +8,7 @@ Version:	2.0.5
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
-Url:		http://diamon.org/babeltrace
+Url:		https://diamon.org/babeltrace
 Source0:	https://www.efficios.com/files/babeltrace/babeltrace2-%{version}.tar.bz2
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libdw)
