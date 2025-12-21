@@ -10,6 +10,11 @@ License:	GPLv2
 Group:		System/Libraries
 Url:		https://diamon.org/babeltrace
 Source0:	https://www.efficios.com/files/babeltrace/babeltrace2-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libdw)
 BuildRequires:	pkgconfig(libelf)
