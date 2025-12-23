@@ -21,6 +21,7 @@ BuildRequires:	pkgconfig(libelf)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(uuid)
+BuildRequires:  python%{pyver}dist(setuptools)
 BuildRequires:	bison
 BuildRequires:	swig
 
