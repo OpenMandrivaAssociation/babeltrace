@@ -4,8 +4,8 @@
 
 Summary:	An open source trace format converter
 Name:		babeltrace
-Version:	2.0.5
-Release:	2
+Version:	2.1.2
+Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		https://diamon.org/babeltrace
@@ -52,7 +52,7 @@ Python bindings to the babeltrace trace format converter.
 %autosetup -p1 -n babeltrace2-%{version}
 # Remove bison generated files, we want to let our much newer version of bison
 # generate them
-rm src/plugins/ctf/common/metadata/parser.{c,h}
+#rm src/plugins/ctf/common/metadata/parser.{c,h}
 
 %build
 # Workaround for failure at link time
