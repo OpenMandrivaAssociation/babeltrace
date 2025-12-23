@@ -4,8 +4,8 @@
 
 Summary:	An open source trace format converter
 Name:		babeltrace
-Version:	2.0.5
-Release:	2
+Version:	2.1,2
+Release:	1
 License:	GPLv2
 Group:		System/Libraries
 Url:		https://diamon.org/babeltrace
