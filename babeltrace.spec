@@ -52,7 +52,7 @@ Python bindings to the babeltrace trace format converter.
 %autosetup -p1 -n babeltrace2-%{version}
 # Remove bison generated files, we want to let our much newer version of bison
 # generate them
-rm src/plugins/ctf/common/metadata/parser.{c,h}
+#rm src/plugins/ctf/common/metadata/parser.{c,h}
 
 %build
 # Workaround for failure at link time
