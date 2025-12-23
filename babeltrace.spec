@@ -4,7 +4,7 @@
 
 Summary:	An open source trace format converter
 Name:		babeltrace
-Version:	2.1,2
+Version:	2.1.2
 Release:	1
 License:	GPLv2
 Group:		System/Libraries
