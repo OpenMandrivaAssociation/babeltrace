@@ -10,6 +10,8 @@ License:	GPLv2
 Group:		System/Libraries
 Url:		https://diamon.org/babeltrace
 Source0:	https://www.efficios.com/files/babeltrace/babeltrace2-%{version}.tar.bz2
+# SWIG 4.5 dropped SWIG_Python_str_FromChar; Python 3 dropped PyString_*.
+Patch0:		babeltrace-2.1.2-swig45.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
